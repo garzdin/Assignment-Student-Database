@@ -18,9 +18,9 @@ public:
     unsigned int year;
 
     Date(const Date& d) {
-        day = d.day;
-        month = d.month;
-        year = d.year;
+        this->day = d.day;
+        this->month = d.month;
+        this->year = d.year;
     }
     
     Date(const unsigned int d = 0, const unsigned int m = 0, const unsigned int y = 0) {
