@@ -137,15 +137,15 @@ public:
     }
 };
 
-class Potok {
+class StudentStream {
 public:
     unsigned int number;
     unsigned int numberOfStudents;
     Student students[3];
     
-    Potok() {}
+    StudentStream() {}
     
-    Potok(int number, Student students[]) {
+    StudentStream(int number, Student students[]) {
         this->number = number;
         this->numberOfStudents = sizeof(this->students);
         for(int i = 0; i<= this->numberOfStudents; i++) {
@@ -153,10 +153,10 @@ public:
         }
     }
     
-    friend std::ostream& operator<<(std::ostream& stream, Potok& potok);
+    friend std::ostream& operator<<(std::ostream& stream, StudentStream& ss);
     
-    ~Potok() {
-        std::cout<<"Destructing <Potok>"<<std::endl;
+    ~StudentStream() {
+        std::cout<<"Destructing <StudentStream>"<<std::endl;
     }
     
     Student getStudentWithHighestGrade() {
@@ -199,10 +199,10 @@ std::ostream& operator<<(std::ostream& stream, Student& student) {
     return stream<<"Name: "<<student.name<<"Birth date: "<<student.birthDate<<"GPA: "<<student.avScore<<std::endl;
 }
 
-std::ostream& operator<<(std::ostream& stream, Potok& potok) {
-    for(int i = 0; i <= potok.numberOfStudents; i++) {
-        if(potok.students[i].showYears(potok.students[i].birthDate) >= 18 && potok.students[i].showYears(potok.students[i].birthDate) <= 26) {
-            stream<<potok.students[i].name;
+std::ostream& operator<<(std::ostream& stream, StudentStream& ss) {
+    for(int i = 0; i <= ss.numberOfStudents; i++) {
+        if(ss.students[i].showYears(ss.students[i].birthDate) >= 18 && ss.students[i].showYears(ss.students[i].birthDate) <= 26) {
+            stream<<ss.students[i].name;
         }
     }
     return stream<<std::endl;
@@ -213,8 +213,8 @@ int main (int argc, const char * argv[]) {
     students[0] = Student("Teodor", "5109238", Date(14, 8, 1995), 5.95);
     students[1] = Student("Julia", "5109237", Date(17, 11, 1995), 5.12);
     students[2] = Student("Georgi", "5109236", Date(5, 9, 1995), 4.49);
-    Potok potok_1 = Potok(1, students);
-    potok_1.writeStudentsIntoFile();
+    StudentStream ss = StudentStream(1, students);
+    ss.writeStudentsIntoFile();
     
     return 0;
 }
