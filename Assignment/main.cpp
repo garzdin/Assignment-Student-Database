@@ -182,8 +182,6 @@ public:
             textFile<<this->students[i]<<std::endl;
         }
         
-        textFile.close();
-        
         return 0;
     }
 };
