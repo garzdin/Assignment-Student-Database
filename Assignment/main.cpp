@@ -32,58 +32,58 @@ public:
     friend std::ostream& operator<<(std::ostream& stream, Date& date);
     
     int operator==(const Date& d) {
-        return day == d.day && month == d.month && year == d.year;
+        return this->day == d.day && this->month == d.month && this->year == d.year;
     }
     
     Date& operator=(const Date& d) {
         if(this != &d) {
-            day = d.day;
-            month = d.month;
-            year = d.year;
+            this->day = d.day;
+            this->month = d.month;
+            this->year = d.year;
         }
         
         return *this;
     }
     
+    ~Date () {
+        std::cout<<"Destructing <Date>"<<std::endl;
+    }
+    
     unsigned int getDay() {
-        return day;
+        return this->day;
     }
     
     void setDay(const unsigned int d) {
         if (d > 0) {
-            day = d;
+            this->day = d;
         } else {
             throw new std::invalid_argument("Day can't be negative");
         }
     }
     
     unsigned int getMonth() {
-        return month;
+        return this->month;
     }
     
     void setMonth(const unsigned int m) {
         if (m > 0) {
-            month= m;
+            this->month = m;
         } else {
             throw new std::invalid_argument("Month can't be negative");
         }
     }
     
     unsigned int getYear() {
-        return year;
+        return this->year;
     }
     
     void setYear(const unsigned int y) {
         if (y > 0) {
-            year = y;
+            this->year = y;
         }
         else {
             throw new std::invalid_argument("Year can't be negative");
         }
-    }
-    
-    ~Date () {
-        std::cout<<"Destructing <Date>"<<std::endl;
     }
 };
 
@@ -143,9 +143,7 @@ public:
     unsigned int number;
     std::vector<Student> students;
     
-    StudentStream() {
-        std::cout<<"Destructing <StudentStream>"<<std::endl;
-    }
+    StudentStream() {}
     
     StudentStream(int number, std::vector<Student> students) {
         this->number = number;
