@@ -95,10 +95,10 @@ public:
     
     Student() {}
     
-    Student(std::string n, std::string fn, Date* d, float s) {
+    Student(std::string n, std::string fn, Date d, float s) {
         this->name = n;
         this->facNumber = fn;
-        this->birthDate = *d;
+        this->birthDate = d;
         this->avScore = s;
     }
     
@@ -209,12 +209,12 @@ std::ostream& operator<<(std::ostream& stream, Potok& potok) {
 }
 
 int main (int argc, const char * argv[]) {
-    Student *students[3];
-    students[0] = new Student("Teodor", "5109238", new Date(14, 8, 1995), 5.95);
-    students[1] = new Student("Julia", "5109237", new Date(17, 11, 1995), 5.12);
-    students[2] = new Student("Georgi", "5109236", new Date(5, 9, 1995), 4.49);
-    Potok *potok_1 = new Potok(1, *students);
-    potok_1->writeStudentsIntoFile();
+    Student students[3];
+    students[0] = Student("Teodor", "5109238", Date(14, 8, 1995), 5.95);
+    students[1] = Student("Julia", "5109237", Date(17, 11, 1995), 5.12);
+    students[2] = Student("Georgi", "5109236", Date(5, 9, 1995), 4.49);
+    Potok potok_1 = Potok(1, students);
+    potok_1.writeStudentsIntoFile();
     
     return 0;
 }
