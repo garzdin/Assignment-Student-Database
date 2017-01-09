@@ -9,6 +9,7 @@
 #include <string>
 #include <fstream>
 #include <iostream>
+#include <vector>
 
 class Date {
 public:
@@ -140,17 +141,15 @@ public:
 class StudentStream {
 public:
     unsigned int number;
-    unsigned int numberOfStudents;
-    Student students[3];
+    std::vector<Student> students;
     
-    StudentStream() {}
+    StudentStream() {
+        std::cout<<"Destructing <StudentStream>"<<std::endl;
+    }
     
-    StudentStream(int number, Student students[]) {
+    StudentStream(int number, std::vector<Student> students) {
         this->number = number;
-        this->numberOfStudents = sizeof(this->students);
-        for(int i = 0; i<= this->numberOfStudents; i++) {
-            this->students[i] = students[i];
-        }
+        this->students = students;
     }
     
     friend std::ostream& operator<<(std::ostream& stream, StudentStream& ss);
@@ -161,7 +160,7 @@ public:
     
     Student getStudentWithHighestGrade() {
         Student currentStudent;
-        for(int i = 0; i <= this->numberOfStudents; i++) {
+        for(int i = 0; i <= this->students.size(); i++) {
             if(this->students[i].avScore > currentStudent.avScore) currentStudent = this->students[i];
         }
         return currentStudent;
@@ -200,7 +199,7 @@ std::ostream& operator<<(std::ostream& stream, Student& student) {
 }
 
 std::ostream& operator<<(std::ostream& stream, StudentStream& ss) {
-    for(int i = 0; i <= ss.numberOfStudents; i++) {
+    for(int i = 0; i <= ss.students.size(); i++) {
         if(ss.students[i].showYears(ss.students[i].birthDate) >= 18 && ss.students[i].showYears(ss.students[i].birthDate) <= 26) {
             stream<<ss.students[i].name;
         }
@@ -209,7 +208,7 @@ std::ostream& operator<<(std::ostream& stream, StudentStream& ss) {
 }
 
 int main (int argc, const char * argv[]) {
-    Student students[3];
+    std::vector<Student> students;
     students[0] = Student("Teodor", "5109238", Date(14, 8, 1995), 5.95);
     students[1] = Student("Julia", "5109237", Date(17, 11, 1995), 5.12);
     students[2] = Student("Georgi", "5109236", Date(5, 9, 1995), 4.49);
